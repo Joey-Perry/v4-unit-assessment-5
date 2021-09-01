@@ -29,8 +29,9 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     const { username, password } = req.body;
+    
     try {
-        const foundUser = await db(req).user.find_user_by_username([username]);
+        const foundUser = await db(req).user.find_user_by_username(username);
         const existingUser = foundUser[0];
         if (!existingUser) {
             return res.status(401).send('User not found. Please register before attempting to log in.');
@@ -39,11 +40,13 @@ const login = async (req, res) => {
             if (!isAuthenticated){
                 return res.status(403).send('Incorrect password!')
             } else {
+
                 req.session.user = {
                     id: existingUser.id,
                     username: existingUser.username,
                     profilePic: existingUser.profile_pic
                 }
+                console.log(req.session.user);
                 return res.status(200).send(req.session.user);
             }
         }
@@ -67,6 +70,7 @@ const getUser = async (req, res) => {
 
 const logout = (req, res) => {
     req.session.destroy();
+    console.log('Logged out!');
     res.status(200).send('User logged out');
 }
 

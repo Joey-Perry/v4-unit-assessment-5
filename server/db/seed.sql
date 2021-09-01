@@ -13,3 +13,7 @@ CREATE TABLE helo_posts (
     author_id INT REFERENCES helo_users(id),
     date_created TIMESTAMP
 )
+
+ALTER TABLE helo_users
+ALTER COLUMN username TYPE VARCHAR,
+ALTER COLUMN password TYPE VARCHAR;

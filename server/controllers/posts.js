@@ -39,6 +39,17 @@ module.exports = {
     },
     createPost: (req, res) => {
       //code here
+      const db = req.app.get('db');
+      const { id } = req.session.user;
+      const { title, img, content } = req.body;
+      const date = new Date();
+      if (id){
+        db.create_post([id, title, image, content, date])
+          .then(() => res.sendStatus(200))
+          .catch(err => console.log(`Error creating post: ${err}`));
+      } else {
+        return res.status(403).send('Only logged in users can create posts');
+      }
     },
     readPost: (req, res) => {
       req.app.get('db').post.read_post(req.params.id)

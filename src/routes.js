@@ -1,4 +1,5 @@
-import { Router, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Auth from './Components/Auth/Auth';
 import Dash from './Components/Dash/Dash';
 import Form from './Components/Form/Form';

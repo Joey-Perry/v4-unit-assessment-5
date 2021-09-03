@@ -1,7 +1,7 @@
 CREATE TABLE helo_users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    username VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
     profile_pic TEXT
 )
 
@@ -13,7 +13,3 @@ CREATE TABLE helo_posts (
     author_id INT REFERENCES helo_users(id),
     date_created TIMESTAMP
 )
-
-ALTER TABLE helo_users
-ALTER COLUMN username TYPE VARCHAR,
-ALTER COLUMN password TYPE VARCHAR;

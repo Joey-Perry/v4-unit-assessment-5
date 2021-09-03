@@ -16,7 +16,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     secret: SESSION_SECRET,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 }
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 } // 30 days
 }))
 
 massive({

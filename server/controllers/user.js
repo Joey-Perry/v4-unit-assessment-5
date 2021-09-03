@@ -3,7 +3,6 @@ const db = (req) => req.app.get('db');
 
 const register = async (req, res) => {
     const { username, password } = req.body;
-    const db_ = req.app.get('db');
     try {
         const foundUser = await db(req).user.find_user_by_username([username]);
         const existingUser = foundUser[0];
@@ -12,8 +11,7 @@ const register = async (req, res) => {
         } else {
             const hash = bcrypt.hashSync(password); // default 10 salt
             const profilePic = `https://robohash.org/${username}.png`;
-            // const registeredUser = await db(req).user.create_user([username, hash, profilePic]);
-            const registeredUser = await db_.user.create_user([username, hash, profilePic]);
+            const registeredUser = await db(req).user.create_user([username, hash, profilePic]);
             const user = registeredUser[0];
             req.session.user = {
                 id: user.id,
